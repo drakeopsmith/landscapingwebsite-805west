@@ -7,7 +7,7 @@
 <meta name="description" content="805 West Inc. — Paso Robles' trusted landscape & hardscape contractors. Pavers, retaining walls, flagstone, stucco, veneer stone & maintenance. CSLB #1029557. Call (805) 296-3665." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 :root {
@@ -16,8 +16,8 @@
     --bg: #f7f7f5;
     --text: #1a1a1a;
     --muted: rgba(26,26,26,.5);
-    --font: "Inter", system-ui, sans-serif;
-    --serif: "Playfair Display", serif;
+    --font: "DM Sans", system-ui, sans-serif;
+    --serif: "DM Serif Display", serif;
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
 body { background:var(--bg); color:var(--text); font-family:var(--font); -webkit-font-smoothing:antialiased; overflow-x:hidden }
@@ -220,8 +220,87 @@ input, select, textarea { font:inherit; color:inherit }
 .sticky-bar .bar-est { background:#fff; color:var(--primary) }
 
 /* Animations */
-.fade-in { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease }
+.fade-in { opacity:0; transform:translateY(40px); transition:opacity .8s cubic-bezier(.21,.47,.32,.98), transform .8s cubic-bezier(.21,.47,.32,.98) }
 .fade-in.visible { opacity:1; transform:translateY(0) }
+
+/* Staggered children */
+.stagger > *:nth-child(1) { transition-delay:.05s }
+.stagger > *:nth-child(2) { transition-delay:.12s }
+.stagger > *:nth-child(3) { transition-delay:.19s }
+.stagger > *:nth-child(4) { transition-delay:.26s }
+.stagger > *:nth-child(5) { transition-delay:.33s }
+.stagger > *:nth-child(6) { transition-delay:.4s }
+.stagger > *:nth-child(7) { transition-delay:.47s }
+.stagger > *:nth-child(8) { transition-delay:.54s }
+
+/* Slide-in variants */
+.slide-left { opacity:0; transform:translateX(-50px); transition:opacity .8s cubic-bezier(.21,.47,.32,.98), transform .8s cubic-bezier(.21,.47,.32,.98) }
+.slide-left.visible { opacity:1; transform:translateX(0) }
+.slide-right { opacity:0; transform:translateX(50px); transition:opacity .8s cubic-bezier(.21,.47,.32,.98), transform .8s cubic-bezier(.21,.47,.32,.98) }
+.slide-right.visible { opacity:1; transform:translateX(0) }
+.scale-in { opacity:0; transform:scale(.85); transition:opacity .8s cubic-bezier(.21,.47,.32,.98), transform .8s cubic-bezier(.21,.47,.32,.98) }
+.scale-in.visible { opacity:1; transform:scale(1) }
+
+/* Hero parallax */
+.hero-bg img { transition:transform .1s linear }
+
+/* Slow Ken Burns on hero bg */
+@keyframes kenBurns { 0% { transform:scale(1) } 100% { transform:scale(1.08) } }
+.hero-bg img { animation:kenBurns 20s ease-in-out alternate infinite }
+
+/* Scroll progress bar */
+.scroll-progress { position:fixed; top:0; left:0; height:3px; background:var(--accent); z-index:60; width:0; transition:width .05s linear }
+
+/* Animated counter pulse */
+@keyframes countPop { 0% { transform:scale(1) } 50% { transform:scale(1.08) } 100% { transform:scale(1) } }
+.stat .num.counted { animation:countPop .4s ease }
+
+/* CTA pulse glow */
+@keyframes pulseGlow { 0%,100% { box-shadow:0 8px 30px rgba(255,113,48,.3) } 50% { box-shadow:0 8px 45px rgba(255,113,48,.5) } }
+.btn-primary { animation:pulseGlow 3s ease-in-out infinite }
+
+/* Card tilt on hover */
+.svc-card { transition:transform .4s cubic-bezier(.21,.47,.32,.98), box-shadow .4s }
+.why-card { transition:transform .3s, box-shadow .3s }
+.why-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,.08) }
+
+/* Testimonial card lift */
+.testi-card { transition:transform .3s, box-shadow .3s, border-color .3s }
+.testi-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.06); border-color:rgba(255,113,48,.2) }
+
+/* Gallery item shine overlay */
+.gallery-item::before { content:''; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); transform:skewX(-25deg); z-index:1; transition:left .6s ease }
+.gallery-item:hover::before { left:125% }
+
+/* Smooth underline on nav links */
+.nav-link { position:relative }
+.nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--accent); transition:width .3s }
+.nav-link:hover::after { width:100% }
+
+/* Form input glow */
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--accent); box-shadow:0 4px 12px rgba(255,113,48,.1) }
+
+/* Credential badges hover */
+.cred-item { transition:transform .2s }
+.cred-item:hover { transform:translateY(-2px) }
+.cred-icon { transition:background .3s, color .3s }
+.cred-item:hover .cred-icon { background:var(--accent); color:#fff }
+
+/* Social link bounce */
+@keyframes socialBounce { 0%,100% { transform:scale(1) } 50% { transform:scale(1.15) } }
+.social-link:hover { animation:socialBounce .3s ease }
+.footer-social a:hover { animation:socialBounce .3s ease }
+
+/* Process step connector line (desktop) */
+@media(min-width:768px) {
+    .step { position:relative }
+    .step:not(:last-child)::after { content:''; position:absolute; top:2rem; right:-1rem; width:2rem; height:2px; background:rgba(255,255,255,.15) }
+}
+
+/* Lightbox animation */
+.lightbox { backdrop-filter:blur(8px) }
+.lightbox img { animation:lightboxIn .3s ease forwards }
+@keyframes lightboxIn { from { opacity:0; transform:scale(.9) } to { opacity:1; transform:scale(1) } }
 
 /* Mobile hero fixes */
 @media(max-width:767px) {
@@ -247,6 +326,9 @@ input, select, textarea { font:inherit; color:inherit }
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scrollProgress" class="scroll-progress"></div>
 
 <!-- NAV -->
 <nav id="navbar" class="nav">
@@ -352,7 +434,7 @@ input, select, textarea { font:inherit; color:inherit }
             <h2>Professional Hardscape &<br>Landscape Services</h2>
             <p>From stunning paver patios to structural retaining walls — we handle every aspect of your outdoor project from design to completion.</p>
         </div>
-        <div class="services-grid">
+        <div class="services-grid stagger">
             <div class="svc-card fade-in">
                 <div class="svc-card-img">
                     <img src="https://805west.com/wp-content/uploads/2023/04/poolpavers.png" alt="Paver pool deck installation" />
@@ -449,7 +531,7 @@ input, select, textarea { font:inherit; color:inherit }
             <h2>Recent Projects</h2>
             <p>Real results from real projects across the Central Coast. Click any photo for a closer look.</p>
         </div>
-        <div class="gallery-grid">
+        <div class="gallery-grid stagger">
             <div class="gallery-item fade-in" onclick="openLightbox(this)">
                 <img src="https://805west.com/wp-content/uploads/2023/04/poolpavers.png" alt="Pool paver deck installation" />
             </div>
@@ -486,7 +568,7 @@ input, select, textarea { font:inherit; color:inherit }
             <h2>Built on Quality &<br>Trusted Referrals</h2>
             <p>We don't cut corners. Every project is owner-supervised, built with premium materials, and backed by our reputation.</p>
         </div>
-        <div class="why-grid">
+        <div class="why-grid stagger">
             <div class="why-card fade-in">
                 <div class="why-icon"><i data-lucide="hard-hat" style="width:22px;height:22px;stroke-width:1.5"></i></div>
                 <h3>Owner on Every Job</h3>
@@ -529,7 +611,7 @@ input, select, textarea { font:inherit; color:inherit }
             <h2>From Vision to Reality</h2>
             <p>Getting started is simple. Here's our proven 4-step process.</p>
         </div>
-        <div class="process-grid">
+        <div class="process-grid stagger">
             <div class="step fade-in">
                 <div class="step-num">01</div>
                 <div class="step-icon"><i data-lucide="phone" style="width:20px;height:20px;stroke-width:1.5"></i></div>
@@ -566,7 +648,7 @@ input, select, textarea { font:inherit; color:inherit }
             <h2>What Our Clients Say</h2>
             <p>Real reviews from homeowners and businesses across the Central Coast.</p>
         </div>
-        <div class="testi-grid">
+        <div class="testi-grid stagger">
             <div class="testi-card fade-in">
                 <div class="stars"><i data-lucide="star" style="width:14px;height:14px;fill:currentColor"></i><i data-lucide="star" style="width:14px;height:14px;fill:currentColor"></i><i data-lucide="star" style="width:14px;height:14px;fill:currentColor"></i><i data-lucide="star" style="width:14px;height:14px;fill:currentColor"></i><i data-lucide="star" style="width:14px;height:14px;fill:currentColor"></i></div>
                 <blockquote>"Brandon was there from start to finish. He met with us to pick rock and plants. His communication each day of the progress was excellent. We absolutely love how everything turned out."</blockquote>
@@ -633,7 +715,7 @@ input, select, textarea { font:inherit; color:inherit }
 <section id="contact" class="contact">
     <div class="wrap">
         <div class="contact-grid">
-            <div class="contact-info">
+            <div class="contact-info slide-left">
                 <h2>Let's Build Something<br>Great Together.</h2>
                 <p class="sub">Get a free on-site estimate for your project. No pressure, no obligation — just honest pricing from a licensed contractor.</p>
                 <a href="tel:8052963665" class="contact-detail" style="cursor:pointer">
@@ -683,7 +765,7 @@ input, select, textarea { font:inherit; color:inherit }
                     </a>
                 </div>
             </div>
-            <div class="form-card">
+            <div class="form-card slide-right">
                 <h3>Get Your Free Estimate</h3>
                 <p class="form-sub">Takes 30 seconds. We respond within 24 hours.</p>
                 <form id="contactForm" onsubmit="handleSubmit(event)">
@@ -815,22 +897,55 @@ input, select, textarea { font:inherit; color:inherit }
         if (e.key === 'Escape') closeLightbox();
     });
 
-    // Scroll effects
+    // Scroll effects + progress bar
     var nav = document.getElementById('navbar');
     var bar = document.getElementById('stickyBar');
+    var prog = document.getElementById('scrollProgress');
     window.addEventListener('scroll', function(){
         var y = window.scrollY;
         nav.classList.toggle('scrolled', y > 50);
         bar.classList.toggle('show', y > 400);
+        // Scroll progress
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        if(docH > 0) prog.style.width = (y / docH * 100) + '%';
     }, { passive: true });
 
-    // Fade in on scroll
+    // Intersection observer for all animation classes
     var obs = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
             if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target) }
         });
     }, { threshold: 0.1, rootMargin: '-30px' });
-    document.querySelectorAll('.fade-in').forEach(function(el){ obs.observe(el) });
+    document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in').forEach(function(el){ obs.observe(el) });
+
+    // Animated counters for stats
+    var statObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(!e.isIntersecting) return;
+            var nums = e.target.querySelectorAll('.num');
+            nums.forEach(function(el){
+                var text = el.textContent.trim();
+                var match = text.match(/^(\d+)/);
+                if(!match) return;
+                var target = parseInt(match[1]);
+                var suffix = text.replace(match[1], '');
+                var duration = 1200;
+                var start = performance.now();
+                el.textContent = '0' + suffix;
+                function tick(now){
+                    var p = Math.min((now - start) / duration, 1);
+                    var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+                    el.textContent = Math.round(target * eased) + suffix;
+                    if(p < 1) requestAnimationFrame(tick);
+                    else el.classList.add('counted');
+                }
+                requestAnimationFrame(tick);
+            });
+            statObs.unobserve(e.target);
+        });
+    }, { threshold: 0.3 });
+    var statsEl = document.querySelector('.stats-grid');
+    if(statsEl) statObs.observe(statsEl);
 
     // Init icons
     lucide.createIcons();
